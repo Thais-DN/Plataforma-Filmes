@@ -20,6 +20,13 @@ class GetFilme(generics.ListAPIView):
         id_filme=self.kwargs['id_filme']
         return Filme.objects.filter(pk=id_filme)
     
+class GetGrupos(generics.ListAPIView):
+    serializer_class = GrupoSerializers
+    
+    def get_queryset(self):
+        id_sub_categoria=self.kwargs['id_sub_categoria']
+        return Grupo.objects.filter(subCategoria=id_sub_categoria)
+    
 class GetFilmesGrupo(generics.ListAPIView):
     serializer_class = FilmeSerializers
     

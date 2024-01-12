@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
-from movie.views import FilmeViewSet, GetFilme, GetFilmesGrupo, GrupoViewSet
-from categoria.views import CategoriaViewSet, SubCategoriaViewSet
+from movie.views import FilmeViewSet, GetFilme, GetFilmesGrupo, GetGrupos, GrupoViewSet
+from categoria.views import CategoriaViewSet, SubCategoriaViewSet, GetCategoria
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -17,6 +17,8 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     re_path('^api/filme/(?P<id_filme>.+)/$', GetFilme.as_view()),
-    re_path('^api/grupo/(?P<id_grupo>.+)/filmes/$', GetFilmesGrupo.as_view())
+    re_path('^api/categoria/(?P<id_categoria>.+)/sub_categorias/$', GetCategoria.as_view()),
+    re_path('^api/sub_categoria/(?P<id_sub_categoria>.+)/grupos/$', GetGrupos.as_view()),
+    re_path('^api/grupo/(?P<id_grupo>.+)/filmes/$', GetFilmesGrupo.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
